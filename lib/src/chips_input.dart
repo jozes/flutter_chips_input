@@ -283,7 +283,7 @@ class ChipsInputState<T> extends State<ChipsInput<T>> implements TextInputClient
     Future.delayed(const Duration(milliseconds: 300), () {
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         final renderBox = context.findRenderObject() as RenderBox;
-        await Scrollable.of(context)?.position.ensureVisible(renderBox).then((_) {
+        await Scrollable.of(context).position.ensureVisible(renderBox).then((_) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             _suggestionsBoxController.overlayEntry?.markNeedsBuild();
           });
@@ -375,6 +375,17 @@ class ChipsInputState<T> extends State<ChipsInput<T>> implements TextInputClient
   }
 
   @override
+  void performSelector(String selectorName) {
+    //TODO
+  }
+
+  @override
+  void didChangeInputControl(
+      TextInputControl? oldControl, TextInputControl? newControl) {
+    //TODO
+  }
+
+  @override
   void didUpdateWidget(covariant ChipsInput<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
   }
@@ -419,7 +430,7 @@ class ChipsInputState<T> extends State<ChipsInput<T>> implements TextInputClient
                 _value.normalCharactersText,
                 maxLines: 1,
                 overflow: widget.textOverflow,
-                style: widget.textStyle ?? theme.textTheme.subtitle1?.copyWith(height: 1.5),
+                style: widget.textStyle ?? theme.textTheme.titleMedium?.copyWith(height: 1.5),
               ),
             ),
             Flexible(
